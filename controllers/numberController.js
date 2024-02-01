@@ -10,6 +10,27 @@ res -> It's our request's response
 next -> Calls our next middleware in the Stack if any
 */
 
+const createJSON = (res, resultObject) => {
+  // Create a random name for our JSON File
+  const randomNumber = uuidv4();
+
+  // Write a result to a JSON file using the FS module
+  fs.writeFile(
+    `output-${randomNumber}.json`,
+    JSON.stringify(resultObject, null, 2),
+    (err) => {
+      if (err) {
+        res
+          .status(500)
+          .json({ status: "failed", message: "Error writing to JSON file" });
+      } else {
+        // Sending the API Response
+        res.status(200).json(resultObject);
+      }
+    }
+  );
+};
+
 exports.checkNumber = (req, res, next) => {
   // This is a [GET] request so the Number is in the Request Query
   const { number } = req.query;
@@ -64,22 +85,6 @@ exports.checkNumber = (req, res, next) => {
 
   const resultObject = { status: "success", result };
 
-  // Create a random name for our JSON File
-  const randomNumber = uuidv4();
-
-  // Write a result to a JSON file using the FS module
-  fs.writeFile(
-    `output-${randomNumber}.json`,
-    JSON.stringify(resultObject, null, 2),
-    (err) => {
-      if (err) {
-        res
-          .status(500)
-          .json({ status: "failed", message: "Error writing to JSON file" });
-      } else {
-        // Sending the API Response
-        res.status(200).json(resultObject);
-      }
-    }
-  );
+  // Call our fn to create and store the JSON File
+  createJSON(res, resultObject);
 };
