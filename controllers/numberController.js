@@ -1,5 +1,5 @@
 // Require our core Module if any
-
+const fs = require("fs");
 /*
 Create an export function that will be 
 executed when the "/" route is fired
@@ -61,8 +61,17 @@ exports.checkNumber = (req, res, next) => {
     result = inputNumber.toString();
   }
 
-  res.status(200).json({
-    status: "Success",
-    result,
+  const resultObject = { status: "success", result };
+
+  // Write a result to a JSON file using the FS module
+  fs.writeFile("output.json", JSON.stringify(resultObject, null, 2), (err) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "failed", message: "Error writing to JSON file" });
+    } else {
+      // Sending the API Response
+      res.status(200).json(resultObject);
+    }
   });
 };
