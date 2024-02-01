@@ -1,8 +1,16 @@
 // Requiiring our Core Modules
 const express = require("express");
+const morgan = require("morgan");
 
 // Setup our express application
 const app = express();
+
+/*
+Configuring Morgan
+Morgan will be responsible to log out serve responses in a more better way
+Concise output colored by response status for development use. 
+*/
+app.use(morgan("dev"));
 
 /*
 Making our express app use JSON
