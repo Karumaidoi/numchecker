@@ -1,15 +1,14 @@
 // Require our core Module if any
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
+
 /*
-Create an export function that will be 
-executed when the "/" route is fired
+Create an  function that will be 
+responsible to creating the JSON File
 
-req -> Represents the request object of our API request [Object holds Params, queries etc]
 res -> It's our request's response
-next -> Calls our next middleware in the Stack if any
+resultObject -> The Object to be written inside the JSON file
 */
-
 const createJSON = (res, resultObject) => {
   // Create a random name for our JSON File
   const randomNumber = uuidv4();
@@ -31,6 +30,14 @@ const createJSON = (res, resultObject) => {
   );
 };
 
+/*
+Create an export function that will be 
+executed when the "/" route is fired
+
+req -> Represents the request object of our API request [Object holds Params, queries etc]
+res -> It's our request's response
+next -> Calls our next middleware in the Stack if any
+*/
 exports.checkNumber = (req, res, next) => {
   // This is a [GET] request so the Number is in the Request Query
   const { number } = req.query;
