@@ -1,0 +1,16 @@
+{
+  "name": "numchecker",
+  "version": "1.0.0",
+  "description": "a get api to check remaider of a number - Integer",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "num",
+    "checker"
+  ],
+  "author": "alex maina",
+  "license": "ISC"
+}
