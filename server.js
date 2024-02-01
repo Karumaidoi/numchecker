@@ -1,6 +1,8 @@
 // Requring modules
 const dotenv = require("dotenv");
 
+const app = require("./app");
+
 // Configuring our environment variables
 dotenv.config({ path: "./env" });
 
@@ -9,5 +11,7 @@ dotenv.config({ path: "./env" });
 const port = process.env.PORT || 4400;
 
 // Create the server to serve our requests
-const server = 
-
+// To log our server we can use a package such as Morgan
+const server = app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
