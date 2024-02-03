@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 Create an  function that will be 
 responsible to creating the JSON File
 
-res -> It's our request's response
+res -> It's our request's responses
 resultObject -> The Object to be written inside the JSON file
 */
 const createJSON = (res, resultObject) => {
